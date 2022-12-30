@@ -1,0 +1,21 @@
+
+.button {
+    width: 100px;
+    height: 70px;
+    border-radius: 10px;
+    font-size: 20px;
+
+
+
+}
+.buttonActive {
+    color: white;
+    background-color: #4170ff;
+    border: none;
+
+}
+.buttonDisable {
+    color: #4170ff;
+    border: 2px solid  #4170ff;
+    opacity: 50%;
+}
