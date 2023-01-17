@@ -1,12 +1,13 @@
 import s from "./Button.module.css"
 import React, {FC, useState} from 'react';
-import {TitleProps} from "../App";
 
-type ButtonPropsType = {
+
+export type ButtonPropsType = {
     title: TitleProps
     callBack: () => void
     checkDisable: boolean
 }
+export type TitleProps = "Add" | "Reset" | "Set"
 
 const Button: FC<ButtonPropsType> = (
     {
