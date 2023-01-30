@@ -1,35 +1,36 @@
-import React, {FC, useState} from "react";
+import React, {FC} from "react";
 import s from "../App.module.css";
 import Button, {TitleProps} from "./Button";
-import {CounterPropsType} from "./Setter";
 
+type CounterPropsType = {
+    startMinValue:number
+    startMaxValue:number
+    count: number
+    setCount: (count: number) => void
 
+    onReset:()=>void
 
+}
 
-export const Counter: FC<CounterPropsType> = ({minNum,maxNum} ) => {
-
-   console.log(maxNum,minNum)
-    const [num, setNum] = useState<number>(minNum)
-
-    const onAddHandler = (maxNum:number) => {
-        if (num < maxNum) {
-            setNum(num + 1)
+export const Counter: FC<CounterPropsType> = ({startMinValue,startMaxValue,count,setCount,onReset}) => {
+    console.log(count, startMaxValue)
+    const onAddHandler = (startMaxValue:number) => {
+        if (count < startMaxValue) {
+            setCount(count + 1)
         }
     }
-    const onResetHandler = () => {
-        setNum(0)
-    }
-    const checkDisable = (title: TitleProps) => title === "Add" && num === maxNum || title === "Reset" && num === minNum
 
-    const numContainer = `${s.numContainer} ${num === maxNum ? s.numColorMax : ''}`
+    const checkDisable = (title: TitleProps) => title === "Add" && count === startMaxValue || title === "Reset" && count === startMinValue
+
+    const numContainer = count > 0 ? `${s.numContainer} ${count === startMaxValue ? s.numColorMax : ''}` : `${s.containerText}`
 
     return (
         <div className={s.container}>
             <h1>Counter</h1>
-            <div className={s.numContainer}>{num}</div>
+            <div className={numContainer}>{count > 0 ? count : 'Set initial value'}</div>
             <div className={s.buttons}>
-                <Button title={"Add"} callBack={()=>onAddHandler(maxNum)} checkDisable={checkDisable("Add")}/>
-                <Button title={"Reset"} callBack={onResetHandler} checkDisable={checkDisable("Reset")}/>
+                <Button title={"Add"} callBack={() => onAddHandler(startMaxValue)} checkDisable={checkDisable("Add")}/>
+                <Button title={"Reset"} callBack={onReset} checkDisable={checkDisable("Reset")}/>
             </div>
         </div>
 

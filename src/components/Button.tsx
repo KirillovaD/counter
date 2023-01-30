@@ -1,5 +1,5 @@
 import s from "./Button.module.css"
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 
 
 export type ButtonPropsType = {
@@ -16,7 +16,6 @@ const Button: FC<ButtonPropsType> = (
         checkDisable
     }
 ) => {
-
 
     const onClickHandler = () => {
         callBack()
