@@ -14,9 +14,6 @@ type SetterPropsType = {
 
 export const Setter: FC<SetterPropsType> = ({setterMinValue,setterMaxValue,setSetterMinValue,setSetterMaxValue,checkDisable, onSetter}) => {
 
-    // const [setterMinValue, setSetterMinValue] = useState<number>(0)
-    // const [setterMaxValue, setSetterMaxValue] = useState<number>(0)
-
     const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
         Number(e.currentTarget.value) > 0 && setSetterMinValue(Number(e.currentTarget.value))
         setSetterMaxValue(Number(e.currentTarget.value) + 1)
@@ -25,10 +22,8 @@ export const Setter: FC<SetterPropsType> = ({setterMinValue,setterMaxValue,setSe
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>, setterMinValue: number) => {
         Number(e.currentTarget.value) > setterMinValue && setSetterMaxValue(Number(e.currentTarget.value))
     }
-    // const [checkDisable, setCheckDisable] = useState(false)
     const onSetHandler = () => {
         onSetter(setterMinValue, setterMaxValue)
-        // setCheckDisable(true)
     }
 
     return (

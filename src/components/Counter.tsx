@@ -1,36 +1,32 @@
 import React, {FC} from "react";
 import s from "../App.module.css";
-import Button, {TitleProps} from "./Button";
+import Button from "./Button";
 
 type CounterPropsType = {
-    startMinValue:number
-    startMaxValue:number
-    count: number
-    setCount: (count: number) => void
-
+    countMinValue:number
+    countMaxValue:number
+    setCount: (countMinValue: number) => void
     onReset:()=>void
 
 }
 
-export const Counter: FC<CounterPropsType> = ({startMinValue,startMaxValue,count,setCount,onReset}) => {
-    console.log(count, startMaxValue)
-    const onAddHandler = (startMaxValue:number) => {
-        if (count < startMaxValue) {
-            setCount(count + 1)
+export const Counter: FC<CounterPropsType> = ({countMinValue,countMaxValue,setCount,onReset}) => {
+    console.log(countMinValue, countMaxValue)
+    const onAddHandler = (countMaxValue:number) => {
+        if (countMinValue < countMaxValue) {
+            setCount(countMinValue + 1)
         }
     }
 
-    const checkDisable = (title: TitleProps) => title === "Add" && count === startMaxValue || title === "Reset" && count === startMinValue
-
-    const numContainer = count > 0 ? `${s.numContainer} ${count === startMaxValue ? s.numColorMax : ''}` : `${s.containerText}`
+    const numClassContainer = (countMaxValue === 0 && countMinValue === 0) ? `${s.containerText}`:`${s.numContainer} ${countMinValue === countMaxValue? s.numColorMax : ''}`
 
     return (
         <div className={s.container}>
             <h1>Counter</h1>
-            <div className={numContainer}>{count > 0 ? count : 'Set initial value'}</div>
+            <div className={numClassContainer}>{countMaxValue === 0 && countMinValue === 0 ? 'Set initial value': countMinValue}</div>
             <div className={s.buttons}>
-                <Button title={"Add"} callBack={() => onAddHandler(startMaxValue)} checkDisable={checkDisable("Add")}/>
-                <Button title={"Reset"} callBack={onReset} checkDisable={checkDisable("Reset")}/>
+                <Button title={"Add"} callBack={() => onAddHandler(countMaxValue)} checkDisable={countMinValue === countMaxValue}/>
+                <Button title={"Reset"} callBack={onReset} checkDisable={countMinValue !== countMaxValue}/>
             </div>
         </div>
 
