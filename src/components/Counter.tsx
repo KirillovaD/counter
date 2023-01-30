@@ -11,10 +11,12 @@ type CounterPropsType = {
 }
 
 export const Counter: FC<CounterPropsType> = ({countMinValue,countMaxValue,setCount,onReset}) => {
-    console.log(countMinValue, countMaxValue)
+
     const onAddHandler = (countMaxValue:number) => {
         if (countMinValue < countMaxValue) {
-            setCount(countMinValue + 1)
+            let count = countMinValue + 1
+            localStorage.setItem('counter',JSON.stringify(count))
+            setCount(count)
         }
     }
 

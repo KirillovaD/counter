@@ -12,12 +12,12 @@ function App() {
     const [countMinValue, setCountMinValue] = useState(0)
     const [countMaxValue, setCountMaxValue] = useState(0)
 
-
     const [checkDisable, setCheckDisable] = useState(false)
 
     useEffect(()=>{
         let storageMinValue=localStorage.getItem('startMinValue')
-        if ( storageMinValue){
+
+        if (storageMinValue){
             setSetterMinValue(JSON.parse(storageMinValue))
             setCountMinValue(JSON.parse(storageMinValue))
         }
@@ -26,6 +26,12 @@ function App() {
         storageMaxValue && setSetterMaxValue(JSON.parse(storageMaxValue))
 
     },[])
+
+    useEffect(()=>{
+        let storageCounterValue = localStorage.getItem('counter')
+        storageCounterValue &&  setCountMinValue(JSON.parse(storageCounterValue))
+
+    },[countMinValue])
 
     const onSetter = (startMin: number, startMax: number) => {
         if (startMax > 0){
